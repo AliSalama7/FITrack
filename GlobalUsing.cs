@@ -1,0 +1,14 @@
+﻿global using FITrack.Models;
+global using Microsoft.EntityFrameworkCore;
+global using System.ComponentModel.DataAnnotations;
+global using FITrack.Data;
+global using FITrack.Helpers;
+global using System.Text;
+global using AutoMapper;
+global using Microsoft.IdentityModel.Tokens;
+global using FITrack.Services;
+global using Microsoft.AspNetCore.Mvc;
+global using FITrack.DTOS;
+global using FITrack.Settings;
+global using Microsoft.AspNetCore.Identity;
+global using System.Security.Claims;
