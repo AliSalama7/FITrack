@@ -5,7 +5,7 @@ namespace FITrack.MiddleWares
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionHandlingMiddleWare> _logger;
-        public ExceptionHandlingMiddleWare(RequestDelegate next , ILogger<ExceptionHandlingMiddleWare> logger)
+        public ExceptionHandlingMiddleWare(RequestDelegate next, ILogger<ExceptionHandlingMiddleWare> logger)
         {
             _next = next;
             _logger = logger;
@@ -31,10 +31,11 @@ namespace FITrack.MiddleWares
                 UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
                 _ => StatusCodes.Status500InternalServerError,
             };
-            var result = JsonSerializer.Serialize(new ProblemDetails { 
-                 Type = "Server error",
-                 Title = "Server error",
-                 Detail = "An internal server error"
+            var result = JsonSerializer.Serialize(new ProblemDetails
+            {
+                Type = "Server error",
+                Title = "Server error",
+                Detail = "An internal server error"
             });
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = statusCode;

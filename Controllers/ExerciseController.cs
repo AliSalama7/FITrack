@@ -1,4 +1,5 @@
-﻿namespace FITrack.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+namespace FITrack.FiTrackApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -9,13 +10,14 @@
         {
             _workoutService = workoutService;
         }
+        [Authorize(Roles = "User")]
         [HttpPost("AddExercise")]
         public async Task<IActionResult> AddExerciseAsync([FromForm] ExerciseDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var result = await _workoutService.AddExerciseAsync(dto);
-            if(!result.Success)
+            if (!result.Success)
                 return BadRequest(result.Message);
             return Ok(result);
         }
@@ -55,6 +57,6 @@
                 return BadRequest(result.Message);
             return Ok(result);
         }
-        
+
     }
 }

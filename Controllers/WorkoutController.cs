@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-namespace FITrack.Controllers
+namespace FITrack.FiTrackApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -12,12 +12,12 @@ namespace FITrack.Controllers
         }
         [Authorize(Roles = "User")]
         [HttpPost("AddWorkout")]
-        public async Task<IActionResult> AddWorkoutAsync([FromBody ] WorkoutDto dto)
+        public async Task<IActionResult> AddWorkoutAsync([FromBody] WorkoutDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var Workout = await _workoutService.AddWorkoutAsync(dto);
-            if(!Workout.Success)
+            if (!Workout.Success)
                 return BadRequest(Workout.Message);
             return Ok(Workout);
         }
@@ -26,7 +26,7 @@ namespace FITrack.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-           var workout =  await _workoutService.AddExercisesToWorkoutAsync(workoutId, exerciseDto);
+            var workout = await _workoutService.AddExercisesToWorkoutAsync(workoutId, exerciseDto);
             if (!workout.Success)
                 return BadRequest(workout.Message);
             return Ok(workout);
@@ -42,7 +42,7 @@ namespace FITrack.Controllers
             return Ok(workout);
         }
         [HttpGet("GetWorkouts")]
-        public async Task<IActionResult> GetWorkoutsAsync([FromForm]string UserId)
+        public async Task<IActionResult> GetWorkoutsAsync([FromForm] string UserId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -60,21 +60,21 @@ namespace FITrack.Controllers
             return Ok(workout);
         }
         [HttpDelete("DeleteExerciseFromWorkout/{workoutId}/{exerciseId}")]
-        public IActionResult DeleteExerciseFromWorkout(int workoutId,int exerciseId)
+        public IActionResult DeleteExerciseFromWorkout(int workoutId, int exerciseId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var workout = _workoutService.DeleteExerciseFromWorkout(workoutId , exerciseId);
+            var workout = _workoutService.DeleteExerciseFromWorkout(workoutId, exerciseId);
             if (!workout.Success)
                 return BadRequest(workout.Message);
             return Ok(workout);
         }
         [HttpDelete("DeleteSetFromExercise/{workoutId}/{exerciseId}/{setId}")]
-        public IActionResult DeleteSetFromExercise(int workoutId, int exerciseId,int setId)
+        public IActionResult DeleteSetFromExercise(int workoutId, int exerciseId, int setId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var workout = _workoutService.DeleteSetFromExercise(workoutId, exerciseId,setId);
+            var workout = _workoutService.DeleteSetFromExercise(workoutId, exerciseId, setId);
             if (!workout.Success)
                 return BadRequest(workout.Message);
             return Ok(workout);

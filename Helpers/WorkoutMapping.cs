@@ -1,7 +1,6 @@
-﻿//Extension Method to Mapping
-namespace FITrack.Helpers
+﻿namespace FITrack.Helpers
 {
-    public static class WorkoutMapping 
+    public static class WorkoutMapping
     {
         public static WorkoutDto toDto(this Workout workout)
         {
